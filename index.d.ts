@@ -23,6 +23,7 @@ declare namespace WebcryptoCore {
         EcDH: string;
         Hmac: string;
         Pbkdf2: string;
+        Hkdf: string;
     };
 
     function PrepareAlgorithm(alg: AlgorithmIdentifier | string): Algorithm;
@@ -257,6 +258,17 @@ declare namespace WebcryptoCore {
         protected static KEY_USAGES: string[];
         static checkAlgorithm(alg: Algorithm): void;
         static checkDeriveParams(alg: Pbkdf2Params): void;
+        static generateKey(algorithm: Algorithm, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey | CryptoKeyPair>;
+        static importKey(format: string, keyData: JsonWebKey | BufferSource, algorithm: string | RsaHashedImportParams | EcKeyImportParams | HmacImportParams | DhImportKeyParams, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey>;
+        static deriveKey(algorithm: Pbkdf2Params, baseKey: CryptoKey, derivedKeyType: Algorithm, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey>;
+        static deriveBits(algorithm: Pbkdf2Params, baseKey: CryptoKey, length: number): PromiseLike<ArrayBuffer>;
+    }
+
+    export class Hkdf extends BaseCrypto {
+        protected static ALG_NAME: string;
+        protected static KEY_USAGES: string[];
+        static checkAlgorithm(alg: Algorithm): void;
+        static checkDeriveParams(alg: any): void;
         static generateKey(algorithm: Algorithm, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey | CryptoKeyPair>;
         static importKey(format: string, keyData: JsonWebKey | BufferSource, algorithm: string | RsaHashedImportParams | EcKeyImportParams | HmacImportParams | DhImportKeyParams, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey>;
         static deriveKey(algorithm: Pbkdf2Params, baseKey: CryptoKey, derivedKeyType: Algorithm, extractable: boolean, keyUsages: string[]): PromiseLike<CryptoKey>;

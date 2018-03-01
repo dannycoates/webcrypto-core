@@ -5,6 +5,7 @@ import { AlgorithmError, CryptoKeyError, WebCryptoError } from "./error";
 import { AesCBC, AesCTR, AesECB, AesGCM, AesKW } from "./aes/crypto";
 import { EcDH, EcDSA } from "./ec/crypto";
 import { Hmac } from "./hmac/crypto";
+import { Hkdf } from "./hkdf/crypto";
 import { Pbkdf2 } from "./pbkdf2/crypto";
 import { RsaOAEP, RsaPSS, RsaSSA } from "./rsa/crypto";
 import { Sha } from "./sha/crypto";
@@ -202,6 +203,9 @@ export class SubtleCrypto implements NativeSubtleCrypto {
                 case AlgorithmNames.Pbkdf2.toUpperCase():
                     Class = Pbkdf2;
                     break;
+                case AlgorithmNames.Hkdf.toUpperCase():
+                    Class = Hkdf;
+                    break;
                 default:
                     throw new AlgorithmError(AlgorithmError.UNSUPPORTED_ALGORITHM, alg.name);
             }
@@ -221,6 +225,9 @@ export class SubtleCrypto implements NativeSubtleCrypto {
                     break;
                 case AlgorithmNames.Pbkdf2.toUpperCase():
                     Class = Pbkdf2;
+                    break;
+                case AlgorithmNames.Hkdf.toUpperCase():
+                    Class = Hkdf;
                     break;
                 default:
                     throw new AlgorithmError(AlgorithmError.UNSUPPORTED_ALGORITHM, alg.name);
@@ -324,6 +331,9 @@ export class SubtleCrypto implements NativeSubtleCrypto {
                     break;
                 case AlgorithmNames.Pbkdf2.toUpperCase():
                     Class = Pbkdf2;
+                    break;
+                case AlgorithmNames.Hkdf.toUpperCase():
+                    Class = Hkdf;
                     break;
                 default:
                     throw new AlgorithmError(AlgorithmError.UNSUPPORTED_ALGORITHM, alg.name);
